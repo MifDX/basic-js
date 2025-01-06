@@ -18,10 +18,14 @@ const HALF_LIFE_PERIOD = 5730;
  *
  */
 function dateSample(sampleActivity) {
-  throw new NotImplementedError('Not implemented');
-  typeof sampleActivity === 'string' && Number(sampleActivity)
+  if (typeof sampleActivity === 'string' && Number(sampleActivity) > 0 && Number(sampleActivity) <= 15) {
+    const k = Math.LN2 / HALF_LIFE_PERIOD;
+    let t = Math.log(MODERN_ACTIVITY / Number(sampleActivity)) / k;
+    return Math.ceil(t);
+  } else {
+    return false;
+  }
 }
-
 module.exports = {
   dateSample
 };
